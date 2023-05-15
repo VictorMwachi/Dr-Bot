@@ -1,0 +1,14 @@
+/* Show it is fixed to the top */
+body {
+  min-height: 75rem;
+  padding-top: 4.5rem;
+}
+.btn btn-outline-light me-2 {
+  margin-right: 5px;
+}
+a{
+  margin-right: 5px;
+}
+.navbar{
+  justify-content-center;
+}
