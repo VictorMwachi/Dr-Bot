@@ -9,8 +9,9 @@
 	<title>{% block title %} {% endblock %}</title>
 </head>
 <body>
-	{% include 'header.html' %}
+	
 	<div class="container">
+		{% include 'header.html' %}
 		{% block body %}
 
 		{% endblock %}
