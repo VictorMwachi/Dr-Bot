@@ -1,4 +1,4 @@
-from clinic import app
+from clinic import app,db
 from clinic.forms import RegisterForm,LoginForm,BioForm
 from clinic.models import Users
 from flask import render_template,redirect,flash,url_for
@@ -16,16 +16,12 @@ def home():
 def register():
 	form = RegisterForm()
 	if form.validate_on_submit():
-		print("start")
-		password_hash = generate_password_hash(form.password.data)
-		print(password_hash)
 		new_user = Users(first_name = form.first_name.data,
 			last_name=form.last_name.data,
 			email=form.email.data,
-			password_hash = password_hash)
-		print(new_user)
-		#db.session.add(new_user)
-		#db.session.commit()
+			password_hash = generate_password_hash(form.password.data))
+		db.session.add(new_user)
+		db.session.commit()
 		return f'{form.email.data} {form.first_name.data} {form.last_name.data} has been registered successfully'
 		#return redirect(url_for('login'))
 	else:

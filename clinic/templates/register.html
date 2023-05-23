@@ -17,8 +17,8 @@
 			{{ form.last_name(class='form-control',placeholder='last name') }}
 			{{ form.password.label()}}
 			{{ form.password(class='form-control',placeholder='password') }}
-			{{ form.conf_password.label() }}
-			{{ form.conf_password(class='form-control',placeholder='password') }}
+			{{ form.password2.label() }}
+			{{ form.password2(class='form-control',placeholder='password') }}
 			{{ form.submit(class='form-control btn btn-primary btn-lg',style='margin-top:5px;') }}
 			<small>Have an account? <a href="{{url_for('login')}}">Login</a></small>
 		</form>
