@@ -3,6 +3,16 @@
 {% block title %} bio {% endblock %}
 
 {% block body %}
+
+{% with messages = get_flashed_messages(with_categories=True)%}
+{% for category,message in messages %}
+<div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+  <strong>{{ message }}</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+{% endwith %}
+
 <div class="row">
 	<div class="col-md-2"></div>
 	<div class="col-md-8">
