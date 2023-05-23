@@ -3,9 +3,24 @@
 {% block title %} bio {% endblock %}
 
 {% block body %}
-<form>
+<div class="row">
+	<div class="col-md-2"></div>
+	<div class="col-md-8">
+		<form method="POST" action="{{url_for('bio_data')}}">
+		<h3>Update Your Bio</h3>
+			{{ form.birthday.label() }}
+			{{ form.birthday(class='form-control') }}
+			{{ form.town.label() }}
+			{{ form.town(class='form-control') }}
+			{{ form.country.label() }}
+			{{ form.country(class='form-control')}}
+			{{ form.physical_address.label() }}
+			{{ form.physical_address(class='form-control') }}
+			{{ form.submit(class=' btn btn-lg btn-warning form-control', style='margin-top:5px;')}}
+		</form>
+	</div>
 	
-</form>
+</div>
 
 
 {% endblock %}

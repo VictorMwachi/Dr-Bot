@@ -1,6 +1,6 @@
 from flask_login import UserMixin
 from clinic import db,app
-class User(UserMixin,db.Model):
+class Users(UserMixin,db.Model):
 	id = db.Column(db.Integer(), primary_key=True)
 	first_name = db.Column(db.String(25),nullable=False)
 	last_name = db.Column(db.String(25),nullable=False)
@@ -24,7 +24,7 @@ class Bio(db.Model):
 	town = db.Column(db.String(15),nullable=False)
 	country = db.Column(db.String(20),nullable=False)
 	phone = db.Column(db.String(15),nullable=False)
-	user_id = db.Column(db.Integer(),db.ForeignKey('user.id'),nullable=False,unique=True)
+	user_id = db.Column(db.Integer(),db.ForeignKey('users.id'),nullable=False,unique=True)
 
 	def __init__(self,birthday,phone,physical_address,town,country,user_id):
 		self.birthday = birthday

@@ -1,6 +1,6 @@
 from clinic import app
-from clinic.forms import RegisterForm,LoginForm
-from clinic.models import User
+from clinic.forms import RegisterForm,LoginForm,BioForm
+from clinic.models import Users
 from flask import render_template,redirect,flash,url_for
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user,LoginManager,logout_user,login_required,current_user
@@ -16,16 +16,25 @@ def home():
 def register():
 	form = RegisterForm()
 	if form.validate_on_submit():
-
-		new_user = User(first_name = form.first_name.data,
+		print("start")
+		password_hash = generate_password_hash(form.password.data)
+		print(password_hash)
+		new_user = Users(first_name = form.first_name.data,
 			last_name=form.last_name.data,
 			email=form.email.data,
-			password_hash = generate_password_hash(form.password.data))
-		db.session.add(new_user)
-		db.session.commit()
-		flash(f'{email} {first_name} {last_name} has been registered successfully')
+			password_hash = password_hash)
+		print(new_user)
+		#db.session.add(new_user)
+		#db.session.commit()
+		return f'{form.email.data} {form.first_name.data} {form.last_name.data} has been registered successfully'
+		#return redirect(url_for('login'))
+	else:
+		if form.errors != {}:
+			print(form.errors)
+			#for error in form.errors.values():
+				#print(error)
 
-	return render_template('register.html',form=form)
+	return render_template('register.html', form=form)
 
 
 @app.route('/login',methods=('GET','POST'),strict_slashes=False)
@@ -39,7 +48,7 @@ def logout():
 
 @app.route('/dashboard',methods=('GET','POST'),strict_slashes=False)
 def dashboard():
-	return "this is th dashboard"
+	return render_template('dashboard.html')
 
 @app.route('/about',strict_slashes=False)
 def about_page():
@@ -51,4 +60,5 @@ def contact_page():
 
 @app.route('/bio',methods=('GET','POST'),strict_slashes=False)
 def bio_data():
-	return render_template('bio.html')
+	form = BioForm()
+	return render_template('bio.html',form=form)
