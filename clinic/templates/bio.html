@@ -16,18 +16,25 @@
 <div class="row">
 	<div class="col-md-2"></div>
 	<div class="col-md-8">
+		<div class="card">
 		<form method="POST" action="{{url_for('bio_data')}}">
-		<h3>Update Your Bio</h3>
-			{{ form.birthday.label() }}
-			{{ form.birthday(class='form-control') }}
-			{{ form.town.label() }}
-			{{ form.town(class='form-control') }}
-			{{ form.country.label() }}
-			{{ form.country(class='form-control')}}
-			{{ form.physical_address.label() }}
-			{{ form.physical_address(class='form-control') }}
-			{{ form.submit(class=' btn btn-lg btn-warning form-control', style='margin-top:5px;')}}
+			<div class="card-body rounded-4 shadow">
+				<div class="card-header bg-white border-bottom-0 p-5 pb-4">
+					<h3 class="fw-bold mb-0 fs-2">Update Your Bio</h3>
+				</div>
+			{{ form.birthday.label(class='mb-0') }}
+			{{ form.birthday(class='form-control mb-2') }}
+			{{ form.town.label(class="mb-0") }}
+			{{ form.town(class='form-control mb-2') }}
+			{{ form.country.label(class="mb-0") }}
+			{{ form.country(class='form-control mb-2')}}
+			{{ form.physical_address.label(class="mb-0") }}
+			{{ form.physical_address(class='form-control mb-2') }}
+			{{ form.submit(class='form-control mb-2 btn btn-lg rounded-3 btn-primary', style='margin-top:5px;')}}
+		</div>
 		</form>
+	</div>
+	</div>
 	</div>
 	
 </div>

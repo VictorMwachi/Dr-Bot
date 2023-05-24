@@ -16,22 +16,28 @@
 <div class="row">
 	<div class="col-md-3"></div>
 	<div class="col-md-6">
-		<form method="POST" action="{{url_for('register')}}">
-			<h3>Registeration Form</h3>
-			{{ form.csrf_token }}
-			{{ form.email.label() }}
-			{{ form.email(class='form-control',placeholder='youremail@example.com') }}
-			{{ form.first_name.label() }}
-			{{ form.first_name(class='form-control',placeholder='first name') }}
-			{{ form.last_name.label() }}
-			{{ form.last_name(class='form-control',placeholder='last name') }}
-			{{ form.password.label()}}
-			{{ form.password(class='form-control',placeholder='password') }}
-			{{ form.password2.label() }}
-			{{ form.password2(class='form-control',placeholder='password') }}
-			{{ form.submit(class='form-control btn btn-primary btn-lg',style='margin-top:5px;') }}
-			<small>Have an account? <a href="{{url_for('login')}}">Login</a></small>
-		</form>
+		<div class="card-header">
+			<form method="POST" action="{{url_for('register')}}">
+				<div class="card-body rounded-4 shadow">
+					<div class="card-header bg-white border-bottom-0 p-5 pb-4">
+						<h3 class="fw-bold mb-0 fs-2">Registeration Form</h3>
+					</div>
+					{{ form.csrf_token }}
+					{{ form.email.label(class='mb-0') }}
+					{{ form.email(class='form-control mb-3',placeholder='youremail@example.com') }}
+					{{ form.first_name.label(class='mb-0') }}
+					{{ form.first_name(class='form-control mb-3',placeholder='first name') }}
+					{{ form.last_name.label(class='mb-0') }}
+					{{ form.last_name(class='form-control mb-3',placeholder='last name') }}
+					{{ form.password.label(class='mb-0')}}
+					{{ form.password(class='form-control mb-3',placeholder='password') }}
+					{{ form.password2.label(class='mb-0') }}
+					{{ form.password2(class='form-control mb-3',placeholder='password') }}
+					{{ form.submit(class='form-control btn btn-primary btn-lg',style='margin-top:5px;') }}
+					<small>Have an account? <a href="{{url_for('login')}}">Login</a></small>
+				</div>
+			</form>
+		</div>
 	</div>
 	<div class="col-md-3"></div>
 </div>
