@@ -12,3 +12,11 @@ a{
 .navbar{
   justify-content-center;
 }
+span{
+  color: white;
+  text-align: center;
+}
+p{
+  color: white;
+  text-align: center;
+}

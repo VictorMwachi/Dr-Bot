@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField,PasswordField,SubmitField,DateField
+from wtforms import StringField,PasswordField,SubmitField,DateField,IntegerField
 from wtforms.validators import Length, EqualTo, DataRequired,Email
 
 class RegisterForm(FlaskForm):
@@ -19,6 +19,7 @@ class LoginForm(FlaskForm):
 
 class BioForm(FlaskForm):
 	"""Bio data Form"""
+	user_id = IntegerField()
 	birthday = DateField(label='Date of Birth:',validators=[DataRequired()])
 	town = StringField(label='Town:',validators=[DataRequired()])
 	country = StringField(label='Country:',validators=[DataRequired()])

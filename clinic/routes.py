@@ -1,6 +1,6 @@
 from clinic import app,db,login_manager
 from clinic.forms import RegisterForm,LoginForm,BioForm
-from clinic.models import Users
+from clinic.models import Users,Bio
 from flask import render_template,redirect,flash,url_for
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user,logout_user,login_required,current_user
@@ -87,4 +87,28 @@ def contact_page():
 @login_required
 def bio_data():
 	form = BioForm()
-	return render_template('bio.html',form=form)
+	bio = Bio.query.filter_by(user_id=current_user.id).first()
+
+	if form.validate_on_submit():
+		new_bio = Bio(town = form.town.data,
+			country=form.country.data,
+			physical_address=form.physical_address.data,
+			birthday = form.birthday.data,
+			phone = form.phone.data,
+			user_id=current_user.id)
+
+		if bio.id is None:
+			db.session.add(new_bio)
+		
+		db.session.commit()
+		flash(f'You have updated bio data sucessfully',category='success')
+		return redirect(url_for('bio_data'))
+	else:
+		if form.errors != {}:
+			#print(form.errors)
+			for error in form.errors.values():
+				#print(error)
+				flash(f'{error}',category='danger')
+
+
+	return render_template('bio.html',form=form,bio=bio)
