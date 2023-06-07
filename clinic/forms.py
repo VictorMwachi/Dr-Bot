@@ -27,5 +27,14 @@ class BioForm(FlaskForm):
 	physical_address = StringField(label='Physical Adress:',validators=[DataRequired()])
 	submit = SubmitField(label='Update')
 
+class DiagnoseForm(FlaskForm):
+	"""dianos form"""
+	user_id = IntegerField()
+	symptom_1 = StringField(label='Symptom_1:',validators=[DataRequired()])
+	symptom_2 = StringField(label='Symptom_2:',validators=[DataRequired()])
+	symptom_3 = StringField(label='Symptom_3:',validators=[DataRequired()])
+	symptom_4 = StringField(label='Symptom_4:',validators=[DataRequired()])
+	submit = SubmitField(label='Consult')
+
 
 		

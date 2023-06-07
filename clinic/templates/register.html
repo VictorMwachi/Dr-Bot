@@ -20,7 +20,8 @@
 			<form method="POST" action="{{url_for('register')}}">
 				<div class="card-body rounded-4 shadow">
 					<div class="card-header bg-white border-bottom-0 p-5 pb-4">
-						<h3 class="fw-bold mb-0 fs-2">Registeration Form</h3>
+						<center><img src="../static/assets/dr_bot_favicon_tranparent.png" style="width:100px; height: 70px;"></a></center>
+						<h3 class="fw-bold mb-0 fs-2 mt-5">Registeration Form</h3>
 					</div>
 					{{ form.csrf_token }}
 					{{ form.email.label(class='mb-0') }}

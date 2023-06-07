@@ -9,8 +9,8 @@ body {
 a{
   margin-right: 5px;
 }
-.navbar{
-  justify-content-center;
+.navbar-nav{
+  align-content: inherit;
 }
 span{
   color: white;
@@ -19,4 +19,10 @@ span{
 p{
   color: white;
   text-align: center;
+}
+.nav-item{
+  text-justify: auto;
+  text-transform: uppercase;
+  font-size: large;
+  font-weight: bolder;
 }

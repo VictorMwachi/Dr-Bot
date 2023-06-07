@@ -12,7 +12,31 @@
 </div>
 {% endfor %}
 {% endwith %}
-
+<div class="row">
+  <div class="col-md-3"></div>
+  <div class="col-md-6">
+    <div class="card">
+    <form method="POST" action="{{url_for('login')}}">
+      <div class="card-body rounded-4 shadow p-lg-4 pt-0">
+        <div class="card-header bg-white border-bottom-0 p-5 pb-4">
+          <center><img src="../static/assets/dr_bot_favicon_tranparent.png" style="width:100px; height: 70px;"></a></center>
+          <h3 class="fw-bold mb-0 fs-2 mt-5">Talk to Dr bot</h3></div>
+      {{ form.csrf_token }}
+      {{ form.symptom_1.label(class='mb-0') }}
+      {{ form.symptom_1(class='form-control mb-3') }}
+      {{ form.symptom_2.label(class='mb-0')}}
+      {{ form.symptom_2(class='form-control mb-3')}}
+      {{ form.symptom_3.label(class='mb-0')}}
+      {{ form.symptom_3(class='form-control mb-3')}}
+      {{ form.symptom_4.label(class='mb-0')}}
+      {{ form.symptom_4(class='form-control mb-3')}}
+      {{ form.submit(class='form-control btn btn-primary btn-lg',style='margin-top:5px;') }}
+    </div>
+    </form>
+  </div>
+  </div>
+  <div class="col-md-3"></div>
+</div>
 
 
 {% endblock %}

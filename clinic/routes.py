@@ -1,5 +1,5 @@
 from clinic import app,db,login_manager
-from clinic.forms import RegisterForm,LoginForm,BioForm
+from clinic.forms import RegisterForm,LoginForm,BioForm,DiagnoseForm
 from clinic.models import Users,Bio
 from flask import render_template,redirect,flash,url_for
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -73,7 +73,9 @@ def logout():
 @app.route('/dashboard',methods=('GET','POST'),strict_slashes=False)
 @login_required
 def dashboard():
-	return render_template('dashboard.html')
+	form=DiagnoseForm()
+	
+	return render_template('dashboard.html',form=form)
 
 @app.route('/about',strict_slashes=False)
 def about_page():
@@ -99,6 +101,13 @@ def bio_data():
 
 		if bio.id is None:
 			db.session.add(new_bio)
+		else:
+			bio.town = form.town.data
+			bio.country=form.country.data,
+			bio.physical_address=form.physical_address.data,
+			bio.birthday = form.birthday.data,
+			bio.phone = form.phone.data,
+			db.session.merge(bio)
 		
 		db.session.commit()
 		flash(f'You have updated bio data sucessfully',category='success')

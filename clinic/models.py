@@ -33,5 +33,6 @@ class Bio(db.Model):
 		self.country = country
 		self.phone = phone
 		self.user_id = user_id
+
 with app.app_context():
 	db.create_all()
