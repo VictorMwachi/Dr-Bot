@@ -78,7 +78,8 @@ def dashboard():
 		new_symptoms = Symptom(symptom_1 = form.symptom_1.data,
 				       symptom_2 = form.symptom_2.data,
 				       symptom_3 = form.symptom_3.data,
-				       symptom_4 = form.symptom_4.data)
+				       symptom_4 = form.symptom_4.data,
+				       user_id=current_user.id)
 		db.session.add(new_symptoms)
 		db.session.commit()
 	else:
