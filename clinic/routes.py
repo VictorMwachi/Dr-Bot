@@ -4,8 +4,12 @@ from clinic.models import Users,Bio,Symptom
 from flask import render_template,redirect,flash,url_for
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user,logout_user,login_required,current_user
+from sklearn.ensemble import GradientBoostingClassifier
+import pickle
 
 
+GBC_model = GradientBoostingClassifier()
+model = pickle.load(open('dr_bot.sav', 'rb'))
 
 login_manager.login_view='login'
 @login_manager.user_loader
@@ -82,6 +86,8 @@ def dashboard():
 				       user_id=current_user.id)
 		db.session.add(new_symptoms)
 		db.session.commit()
+		symptoms=[form.symptom_1.data, form.symptom_2.data, form.symptom_3.data,  form.symptom_4.data]
+		diagnosis = model.predict(symptoms)
 	else:
 		if form.errors != {}:
 			#print(form.errors)
@@ -90,7 +96,7 @@ def dashboard():
 				flash(f'{error}',category='danger')
 
 	
-	return render_template('dashboard.html',form=form)
+	return render_template('dashboard.html',form=form,diagnosis=diagnosis)
 
 @app.route('/about',strict_slashes=False)
 def about_page():
