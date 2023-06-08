@@ -7,7 +7,7 @@ class Users(UserMixin,db.Model):
 	email = db.Column(db.String(100),nullable=False,unique=True)
 	password_hash = db.Column(db.String(200),nullable=False)
 	bio = db.relationship('Bio',backref='user',uselist=False, lazy=True)
-	sym = db.relationship('Diagnose',backref='patient',lazy=True)
+	sym = db.relationship('Symptom',backref='patient',lazy=True)
 
 
 	def __init__(self,first_name,last_name,email,password_hash):
