@@ -1,6 +1,6 @@
 from clinic import app,db,login_manager
 from clinic.forms import RegisterForm,LoginForm,BioForm,DiagnoseForm
-from clinic.models import Users,Bio
+from clinic.models import Users,Bio,Symptom
 from flask import render_template,redirect,flash,url_for
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user,logout_user,login_required,current_user
@@ -74,6 +74,20 @@ def logout():
 @login_required
 def dashboard():
 	form=DiagnoseForm()
+	if form.validate_on_submit():
+		new_symptoms = symptom(symptom_1 = form.symptom_1.data,
+				       symptom_2 = form.symptom_2.data,
+				       symptom_3 = form.symptom_3.data,
+				       symptom_4 = form.symptom_4.data)
+		db.session.add(new_symptoms)
+		db.session.commit()
+	else:
+		if form.errors != {}:
+			#print(form.errors)
+			for error in form.errors.values():
+				#print(error)
+				flash(f'{error}',category='danger')
+
 	
 	return render_template('dashboard.html',form=form)
 
