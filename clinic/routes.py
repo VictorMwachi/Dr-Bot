@@ -87,8 +87,8 @@ def dashboard():
 				       user_id=current_user.id)
 		db.session.add(new_symptoms)
 		db.session.commit()
-		symptoms=[form.symptom_1.data, form.symptom_2.data, form.symptom_3.data,  form.symptom_4.data]
-		diagnosis = model.predict(symptoms)
+		#symptoms=[form.symptom_1.data, form.symptom_2.data, form.symptom_3.data,  form.symptom_4.data]
+		#diagnosis = model.predict(symptoms)
 	else:
 		if form.errors != {}:
 			#print(form.errors)
