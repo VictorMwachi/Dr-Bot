@@ -10,6 +10,7 @@ import pickle
 
 GBC_model = GradientBoostingClassifier()
 model = pickle.load(open('dr_bot.sav', 'rb'))
+symptoms=[]
 
 login_manager.login_view='login'
 @login_manager.user_loader
@@ -77,7 +78,6 @@ def logout():
 @app.route('/dashboard',methods=('GET','POST'),strict_slashes=False)
 @login_required
 def dashboard():
-	symptoms = []
 	form=DiagnoseForm()
 	if form.validate_on_submit():
 		new_symptoms = Symptom(symptom_1 = form.symptom_1.data,
