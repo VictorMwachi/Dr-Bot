@@ -97,7 +97,7 @@ def dashboard():
 				flash(f'{error}',category='danger')
 
 	
-	return render_template('dashboard.html',form=form,diagnosis=diagnosis)
+	return render_template('dashboard.html',form=form)
 
 @app.route('/about',strict_slashes=False)
 def about_page():
