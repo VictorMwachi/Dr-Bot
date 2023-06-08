@@ -113,7 +113,7 @@ def bio_data():
 			phone = form.phone.data,
 			user_id=current_user.id)
 
-		if bio.id is None:
+		if bio is None:
 			db.session.add(new_bio)
 		else:
 			bio.town = form.town.data
