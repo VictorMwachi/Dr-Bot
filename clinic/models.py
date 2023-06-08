@@ -7,6 +7,7 @@ class Users(UserMixin,db.Model):
 	email = db.Column(db.String(100),nullable=False,unique=True)
 	password_hash = db.Column(db.String(200),nullable=False)
 	bio = db.relationship('Bio',backref='user',uselist=False, lazy=True)
+	sym = db.relationship('Diagnose',backref='patient',lazy=True)
 
 
 	def __init__(self,first_name,last_name,email,password_hash):
@@ -32,6 +33,22 @@ class Bio(db.Model):
 		self.town = town
 		self.country = country
 		self.phone = phone
+		self.user_id = user_id
+
+class Symptom(db.Model):
+	"""docstring for Diagnose"""
+	id = db.Column(db.Integer(), primary_key=True)
+	symptom_1 = db.Column(db.String(20),nullable=False)
+	symptom_2 = db.Column(db.String(20),nullable=False)
+	symptom_3 = db.Column(db.String(20),nullable=False)
+	symptom_4 = db.Column(db.String(20),nullable=False)
+	user_id = db.Column(db.Integer(),db.ForeignKey('users.id'),nullable=False)
+
+	def __init__(self,symptom_1,symptom_2,symptom_3,symptom_4,user_id):
+		self.symptom_1 = symptom_1
+		self.symptom_2 = symptom_2
+		self.symptom_3 = symptom_3
+		self.symptom_4 = symptom_4
 		self.user_id = user_id
 
 with app.app_context():
