@@ -51,5 +51,8 @@ class Symptom(db.Model):
 		self.symptom_4 = symptom_4
 		self.user_id = user_id
 
+	def __str__(self):
+		return f"{self.symptom_1},{self.symptom_2},{self.symptom_3},{self.symptom_4}"
+
 with app.app_context():
 	db.create_all()
