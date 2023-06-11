@@ -134,7 +134,7 @@ def dashboard():
 		db.session.commit()
 		db.session.refresh(new_diagnosis)
 
-		redirect(url_for('diagnosis_result',id=new_diagnosis.id))
+		return redirect(url_for('diagnosis_result',id=new_diagnosis.id))
 		
 	else:
 		if form.errors != {}:
@@ -148,7 +148,7 @@ def dashboard():
 
 @app.route('/diagnosis/<int:id>',strict_slashes=False)
 @login_required
-def diagnosis_result(id):
+def diagnosis_result(id=id):
 	dis_rec = Diagnosis.query.filter_by(id=id).first()
 	symptoms = Symptom.query.filter_by(id=dis_rec.id).first()
 	user_bio=Bio.query.filter_by(user_id=current_user.id).first()
