@@ -6,24 +6,15 @@
 		<div class="card-header">
 			<center><img src="../static/assets/dr_bot_favicon_tranparent.png" style="width:100px; height: 70px;"></a></center>
 		</div>
-	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-	quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-	consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-	cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-	proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-	quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-	consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-	cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-	proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-	quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-	consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-	cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-	proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+		<label>Name</label>
+		<p>{{current_user.first_name}} {{current_user.last_name}}</p>
+		<label>Date of Birth</label>
+		<p>{{bio.birthday}}</p>
+		<label>Diagnosis</label>
+		<p>{{dis_rec.disease}}</p>
+		<label>symptoms</label>
+		<p>{{symptoms.symptom_1}} {{ symptoms.symptom_2}} {{ symptoms.symptom_3}} {{ symptoms.symptom_4}}</p>
+		<button>Print</button>
 	</div>
 </div>
 

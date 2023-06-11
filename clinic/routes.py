@@ -1,6 +1,6 @@
 from clinic import app,db,login_manager
 from clinic.forms import RegisterForm,LoginForm,BioForm,DiagnoseForm
-from clinic.models import Users,Bio,Symptom
+from clinic.models import Users,Bio,Symptom,Diagnosis
 from flask import render_template,redirect,flash,url_for
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user,logout_user,login_required,current_user
@@ -121,14 +121,20 @@ def dashboard():
 				       user_id=current_user.id)
 		db.session.add(new_symptoms)
 		db.session.commit()
+		db.session.refresh(new_symptoms)
+
 		symp_list=[symp_dict.get(symp,0) for symp in str(new_symptoms).split(",")]
 		for i in range(13):
 			symp_list.append(0)
 
-		result=model.predict(np.array(symp_list).reshape(1,-1))
-		print(result)
+		result=model.predict(np.array(symp_list).reshape(1,-1))[0]
 
-		redirect(url_for('diagnosis_result'))
+		new_diagnosis=Diagnosis(disease=result,user_id=current_user.id,symptoms_id=new_symptoms.id)
+		db.session.add(new_diagnosis)
+		db.session.commit()
+		db.session.refresh(new_diagnosis)
+
+		redirect(url_for('diagnosis_result',id=new_diagnosis.id))
 		
 	else:
 		if form.errors != {}:
@@ -140,14 +146,14 @@ def dashboard():
 	
 	return render_template('dashboard.html',form=form)
 
-@app.route('/diagnosis',strict_slashes=False)
+@app.route('/diagnosis/<int:id>',strict_slashes=False)
 @login_required
-def diagnosis_result():
-	user=Users.query.filter_by(id=current_user.id)
-	#symptom = Symptom.query.filter_by(user_id=current_user.id).first()
-	#diagnosis = model.predict(np.array(str(symptom)))
+def diagnosis_result(id):
+	dis_rec = Diagnosis.query.filter_by(id=id).first()
+	symptoms = Symptom.query.filter_by(id=dis_rec.id).first()
+	user_bio=Bio.query.filter_by(user_id=current_user.id).first()
 
-	return render_template('result.html',user=user)
+	return render_template('result.html',dis_rec=dis_rec,symptoms=symptoms,bio=user_bio)
 
 @app.route('/about',strict_slashes=False)
 def about_page():

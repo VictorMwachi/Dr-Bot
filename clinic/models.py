@@ -1,5 +1,6 @@
 from flask_login import UserMixin
 from clinic import db,app
+
 class Users(UserMixin,db.Model):
 	id = db.Column(db.Integer(), primary_key=True)
 	first_name = db.Column(db.String(25),nullable=False)
@@ -8,6 +9,7 @@ class Users(UserMixin,db.Model):
 	password_hash = db.Column(db.String(200),nullable=False)
 	bio = db.relationship('Bio',backref='user',uselist=False, lazy=True)
 	sym = db.relationship('Symptom',backref='patient',lazy=True)
+	dis = db.relationship('Diagnosis',backref='owner',lazy=True)
 
 
 	def __init__(self,first_name,last_name,email,password_hash):
@@ -43,6 +45,7 @@ class Symptom(db.Model):
 	symptom_3 = db.Column(db.String(20),nullable=False)
 	symptom_4 = db.Column(db.String(20),nullable=False)
 	user_id = db.Column(db.Integer(),db.ForeignKey('users.id'),nullable=False)
+	cause = db.relationship('Diagnosis',backref="symptoms",uselist=False,lazy=True)
 
 	def __init__(self,symptom_1,symptom_2,symptom_3,symptom_4,user_id):
 		self.symptom_1 = symptom_1
@@ -53,6 +56,18 @@ class Symptom(db.Model):
 
 	def __str__(self):
 		return f"{self.symptom_1},{self.symptom_2},{self.symptom_3},{self.symptom_4}"
+
+class Diagnosis(db.Model):
+	id = db.Column(db.Integer(), primary_key=True)
+	disease = db.Column(db.String(35))
+	symptoms_id=db.Column(db.Integer(),db.ForeignKey('symptom.id'),nullable=False)
+	user_id = db.Column(db.Integer(),db.ForeignKey('users.id'),nullable=False)
+
+	def __init__(self,disease,symptoms_id,user_id):
+		self.user_id=user_id
+		self.symptoms_id=symptoms_id
+		self.disease=disease
+
 
 with app.app_context():
 	db.create_all()
